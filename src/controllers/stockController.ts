@@ -13,7 +13,7 @@ const fetchLiveCoinWatchData = async (symbol:string, retries = 3) => {
       meta: true
     }, {
       headers: {
-        'x-api-key': '' //api key here
+        'x-api-key': 'ef8afdb8-c7a0-4e44-852e-691ea43c43bf' //api key here
       }
     });
     return response.data.rate;
@@ -30,7 +30,7 @@ const fetchLiveCoinWatchData = async (symbol:string, retries = 3) => {
 };
 
 export const fetchStockData = async () => {
-  const symbols = ['BTC', 'ETH', 'USDT', 'BNB', 'SOL', 'USDC', 'XRP', 'TONCOIN', 'DOGE', 'ADA'];
+  const symbols = await Stock.distinct('symbol').exec();
   for (const symbol of symbols) {
     try {
       const price = await fetchLiveCoinWatchData(symbol);
